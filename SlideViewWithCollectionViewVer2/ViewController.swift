@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     // MARK: - IBOutlet
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var pageControl: UIPageControl!
     
     // MARK: - Variable
     let CVCellIdentifier = "CollectionViewCell"
@@ -38,6 +39,14 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
             cell.backgroundColor = UIColor.gray
         }
         return cell
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let pageWidth = collectionView.frame.size.width
+        let currentPage = Int(collectionView.contentOffset.x / pageWidth)
+        
+        pageControl.currentPage = currentPage
+        print("Page Number : \(pageControl.currentPage)")
     }
 }
 
